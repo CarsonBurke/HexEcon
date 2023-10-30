@@ -1,0 +1,56 @@
+@font-face {
+    font-family: "Material Icons";
+    font-style: normal;
+    line-height: 1;
+    src: local("Material Icons"), local("MaterialIcons-Regular"), url(https://example.com/MaterialIcons-Regular.woff2) format("woff2"), url(https://example.com/MaterialIcons-Regular.woff) format("woff"), url(https://example.com/MaterialIcons-Regular.ttf) format("truetype");
+}
+
+.material-icons-outlined {}
+
+.voidHidden {
+    display: none;
+}
+
+.spaceHidden {
+    opacity: 0;
+    user-select: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.smallGap {
+    gap: 5px;
+}
+
+.midGap {
+    gap: 10px;
+}
+
+.largeGap {
+    gap: 20px;
+}
+
+.button {
+    border-radius: 30px;
+    background-color: var(--primary);
+    padding: 8px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s;
+    box-shadow: none;
+}
+
+.button:hover {
+    box-shadow: inset rgba(255, 255, 255, 0.2) 0 0 0 1000px,  rgba(0, 0, 0, 0.3) 0 4px 20px 0;
+}
+
+.button:active {
+    background-color: transparent;
+    box-shadow: inset rgba(255, 255, 255, 0.2) 0 0 0 1000px, rgba(0, 0, 0, 0.3) 0 12px 20px 0;
+}

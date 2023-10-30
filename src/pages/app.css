@@ -1,0 +1,179 @@
+/* Game */
+
+
+/* Content */
+
+.envParent {
+    display: flex;
+    padding: 20px 0;
+    min-height: calc(100vh - 40px);
+    background-color: var(--primary);
+    gap: 20px;
+    justify-content: center;
+    position: absolute;
+    min-width: 100%;
+}
+
+.env {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 80px 0;
+    background: var(--secondary);
+    z-index: 1;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    user-select: none;
+}
+
+.displayParent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.displayChild {
+    padding: 20px;
+    gap: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 80px 0;
+    background: var(--secondary);
+}
+
+.envIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 20px 0;
+}
+
+.envTitle {
+    gap: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 1px;
+    user-select: none;
+}
+
+.statsParent {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+}
+
+.statsChild {
+    display: flex;
+    gap: 10px;
+}
+
+.statsChild :nth-child(even) {
+    text-align: left;
+}
+
+.statsChild :nth-child(odd) {
+    text-align: right;
+}
+
+.statsHeader {
+    font-weight: 500;
+    width: 50%;
+}
+
+.statsAmount {
+    font-weight: 200;
+    width: 50%;
+}
+
+.changeParent {
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.changeInput {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding: 6px;
+    padding-left: 15px;
+    font-size: 16px;
+    width: 130px;
+    border: var(--primary) 2px solid;
+    user-select: none;
+    transition: all 0.3s;
+}
+
+.changeInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.changeInput:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 4px 20px 0;
+}
+
+.changeInput:focus {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 12px 20px 0;
+}
+
+.conjoinedButton {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: var(--primary);
+    padding: 8px 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle {
+    width: 20px;
+    height: 20px;
+    appearance: auto;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toggleLabel {
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+}
+
+.toggleLabel:hover {
+    opacity: 0.7;
+}
+
+.toggleLabel:active {
+    opacity: 1;
+}
+
+/* Context menu */
+
+.contextMenu {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 10px 15px 0;
+    position: absolute;
+    background-color: white;
+    z-index: 1000;
+    border-radius: 4px;
+    user-select: none;
+    transition: opacity 0.2s;
+}
+
+.contextMenuChild {
+    transition: all 0.2s;
+    padding: 10px 20px;
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+}
+
+.contextMenuChild:hover {
+    box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 0 10000px;
+}
