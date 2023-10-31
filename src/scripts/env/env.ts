@@ -1,9 +1,7 @@
-import { MAX_RUNNER_SPEED, NETWORK_OUTPUTS } from '../constants'
+import { MAX_RUNNER_SPEED } from '../constants'
 import { Game } from '../game/game'
 import { Application, Assets, Container, Graphics } from 'pixi.js'
-import { Textures } from '../types'
-import { ActivationLayers, Input, NeuralNetwork, Output, WeightLayers } from '../neuralNetwork/network'
-import { networkManager } from '../neuralNetwork/networkManager'
+import { Textures } from '../../types/types'
 
 class Env {
 
@@ -28,7 +26,6 @@ class Env {
     graphics = new Graphics()
 
     settings = {
-        networkVisuals: false,
         enableRender: true,
     }
 
@@ -47,8 +44,6 @@ class Env {
         lastReset: 0,
     }
 
-    sprites: Textures
-
     constructor() {
 
 
@@ -59,8 +54,6 @@ class Env {
         this.initApp()
         this.initContainer()
         this.initGraphics()
-        networkManager.init()
-        this.initNetworks()
         this.initGames()
 
         this.app.ticker.add(this.runFPS)
@@ -68,12 +61,7 @@ class Env {
 
     private async initSprites() {
 
-        this.sprites = {
-            'cellMembrane': await Assets.load('sprites/cellMembrane.png'),
-            'solarCell': await Assets.load('sprites/solarCell.png'),
-            'collectorCell': await Assets.load('sprites/collectorCell.png'),
-            'attackerCell': await Assets.load('sprites/attackerCell.png'),
-        }
+        
     }
 
     private initApp() {
@@ -104,56 +92,6 @@ class Env {
     
             const game = new Game()
             game.init()
-        }
-    }
-
-    private initNetworks(weightLayers?: WeightLayers, activationLayers?: ActivationLayers) {
-
-        const inputs  = [
-            // General
-            new Input('Runs left', [0], ['0']),
-            new Input('Income', [0], ['1']),
-            new Input('Energy', [0], ['2']),
-        ]
-
-        // Cells and positions
-
-        for (let x = 0; x < env.graphSize; x += 1) {
-            for (let y = 0; y < env.graphSize; y += 1) {
-
-                inputs.push(
-                    new Input(x + ', ' + y, [
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                    ], 
-                    [
-                        '3',
-                        '4',
-                        '5',
-                        '6',
-                        '7',
-                        '8',
-                        '9',
-                        '10',
-                        '11',
-                    ])
-                )
-            }
-        }
-
-        for (let i = Object.keys(networkManager.networks).length; i < this.stats.organismsQuota; i++) {
-
-            const network = new NeuralNetwork(weightLayers, activationLayers)
-            if (!weightLayers) network.init(inputs, NETWORK_OUTPUTS.length)
-            network.mutate()
-            if (env.settings.networkVisuals) network.createVisuals(inputs, NETWORK_OUTPUTS)
         }
     }
     
@@ -197,18 +135,12 @@ class Env {
         let runningGames = 0
 
         env.graphics.clear()
-
-        this.stats.organisms = 0
-        this.stats.bestCells = 0
-
-        const winners: Set<string> = new Set()
     
         for (const gameID in this.games) {
     
             const game = this.games[gameID]
             if (!game.running) {
 
-                winners.add(game.winner)
                 continue
             }
 
@@ -225,7 +157,7 @@ class Env {
     
         if (!runningGames) {
     
-            this.reset(winners)
+            this.reset()
         }
 
         const thisUpdateTime = new Date().getTime()
@@ -245,19 +177,10 @@ class Env {
         this.reset()
     }
     
-    reset(winners: Set<string> = new Set()) {
+    reset() {
     
         this.stats.lastReset = this.stats.tick
         this.stats.roundTick = 0
-
-        for (const ID in networkManager.networks) {
-
-            if (winners.has(ID)) continue
-
-            delete networkManager.networks[ID]
-        }
-
-        this.initNetworks()
     
         for (const gameID in this.games) {
     
@@ -318,21 +241,6 @@ class Env {
 
             sprite.alpha = 1
         }
-    }
-
-    toggleNetworkVisuals() {
-
-        if (env.settings.networkVisuals) {
-
-            // Disalbe visuals
-
-            env.settings.networkVisuals = false
-            return
-        }
-
-        // Enable visuals
-
-        env.settings.networkVisuals = true
     }
 
     changeSpeed() {

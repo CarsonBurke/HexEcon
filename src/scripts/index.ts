@@ -1,6 +1,5 @@
 import { MAX_RUNNER_SPEED } from "./constants"
 import { env } from "./env/env"
-import { networkManager } from "./neuralNetwork/networkManager"
 
 export async function main() {
 

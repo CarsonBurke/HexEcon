@@ -1,5 +1,5 @@
 import { env } from "../env/env"
-import { Pos } from "../types"
+import { Pos } from "../../types/types"
 
 
 export function packPos(pos: Pos) {

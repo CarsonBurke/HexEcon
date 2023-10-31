@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react'
 import { main } from '../scripts'
-import { NetworkFrame } from '../scripts/neuralNetwork/networkFrame'
 import './app.css'
 import { env } from '../scripts/env/env'
 import Stat from '../components/stat'
@@ -39,12 +38,6 @@ export default function App() {
                     <label htmlFor='toggleRender' className='toggleLabel'>Render</label>
 
                 </form>
-                <form className="changeParent smallGap" id="form">
-
-                    <input className="toggle waveButton" id="toggleNetworkVisuals" type='checkbox' defaultChecked={env.settings.networkVisuals} onInput={env.toggleNetworkVisuals} />
-                    <label htmlFor='toggleNetworkVisuals' className='toggleLabel'>Network Visuals</label>
-
-                </form>
                 <form className="changeParent" id="form">
 
                     <button className="button waveButton" onClick={() => {env.manualReset()}}>Reset games</button>
@@ -74,9 +67,6 @@ export default function App() {
                     <button className="button conjoinedButton waveButton" onClick={env.changeRoundTickLimit}>Change</button>
 
                 </form>
-
-                <NetworkFrame />
-
             </div>
           </div>
         </div>
