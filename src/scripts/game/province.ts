@@ -74,6 +74,11 @@ export class Province {
 
     }
 
+    run() {
+
+        console.log('ran province ' + this.ID)
+    }
+
     get pos() {
 
         return {
